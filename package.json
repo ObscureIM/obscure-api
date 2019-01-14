@@ -4,7 +4,7 @@
   "description": "API for blockchain explorers",
   "main": "init.js",
   "scripts": {
-    "test": "node init.js"
+    "start": "node init.js"
   },
   "repository": {
     "type": "git",
