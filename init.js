@@ -41,6 +41,22 @@ app.get('/api/latest', function (req, res) {
     res.send(error.message)
   })
 })
+ //lets get transactions in the latest block
+ app.get('/api/latestTransactions', function (req, res) {
+   //res.send('Obsidian Blockchain API')
+   //lets get the latest blocks
+   daemon.getLastBlockHeader().then(function(fufilled){
+     daemon.getBlock({
+       hash:fufilled.hash
+     }).then((block) => {
+       res.send(block.transactions)
+     }).catch(function(error) {
+       res.send(error.message)
+     })
+   }).catch(function(error) {
+     res.send(error.message)
+   })
+ })
 
 app.get("/api/getblocks", function(req, res) {
   //get a list of the 30 latest blocks

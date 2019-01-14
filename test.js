@@ -8,26 +8,39 @@ const daemon = new TurtleCoind({
 })
 
 
-lets start the getblocks process
+//lets start the getblocks process
 
-daemon.height().then(function(fufilled) {
-  daemon.getBlocks({
-  height: fufilled.height - 1
-  }).then((blocks) => {
-    console.log(blocks)
-  }).catch(function(error) {
-    console.log(error.message)
-  })
-}).catch(function(error) {
-  console.log(error.message)
-})
+// daemon.height().then(function(fufilled) {
+//   daemon.getBlocks({
+//   height: fufilled.height - 1
+//   }).then((blocks) => {
+//     console.log(blocks)
+//   }).catch(function(error) {
+//     console.log(error.message)
+//   })
+// }).catch(function(error) {
+//   console.log(error.message)
+// })
+//
+// //lets get the latest blocks
+// daemon.getLastBlockHeader().then(function(fufilled){
+//   daemon.getBlock({
+//     hash:fufilled.hash
+//   }).then((block) => {
+//     console.log(block)
+//   }).catch(function(error) {
+//     console.log(error.message)
+//   })
+// }).catch(function(error) {
+//   console.log(error.message)
+// })
 
-//lets get the latest blocks
+//lets get the transaction in the latest block
 daemon.getLastBlockHeader().then(function(fufilled){
   daemon.getBlock({
     hash:fufilled.hash
   }).then((block) => {
-    console.log(block)
+    console.log(block.transactions)
   }).catch(function(error) {
     console.log(error.message)
   })
