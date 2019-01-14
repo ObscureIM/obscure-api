@@ -2,7 +2,7 @@ var express = require("express");
 
 var app = express();
 
-
+//Initialize the app
 var server = app.listen(process.env.PORT || 8080, function () {
     var port = server.address().port;
     console.log("App now running on port", port);
@@ -26,17 +26,33 @@ function handleError(res, reason, message, code) {
   res.status(code || 500).json({"error": message});
 }
 
-app.get('/', function (req, res) {
-  res.send('hello world')
+app.get('/api/latest', function (req, res) {
+  //res.send('Obsidian Blockchain API')
+  //lets get the latest blocks
+  daemon.getLastBlockHeader().then(function(fufilled){
+    daemon.getBlock({
+      hash:fufilled.hash
+    }).then((block) => {
+      res.send(block)
+    }).catch(function(error) {
+      res.send(error.message)
+    })
+  }).catch(function(error) {
+    res.send(error.message)
+  })
 })
 
-app.get("/api/contacts", function(req, res) {
-  db.collection(CONTACTS_COLLECTION).find({}).toArray(function(err, docs) {
-    if (err) {
-      handleError(res, err.message, "Failed to get contacts.");
-    } else {
-      console.log(docs)
-      res.status(200).json(docs);
-    }
-  });
+app.get("/api/getblocks", function(req, res) {
+  //get a list of the 30 latest blocks
+  daemon.height().then(function(fufilled) {
+    daemon.getBlocks({
+    height: fufilled.height - 1
+    }).then((blocks) => {
+      res.send(blocks)
+    }).catch(function(error) {
+      res.send(error.message)
+    })
+  }).catch(function(error) {
+    res.send(error.message)
+  })
 });
