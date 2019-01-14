@@ -14,6 +14,7 @@ var TurtleCoindRPC = function (opts) {
   this.port = opts.port || 11898
   this.timeout = opts.timeout || 2000
   this.ssl = opts.ssl || false
+  this.enableCors = opts.enableCors || true
 }
 
 TurtleCoindRPC.prototype.getBlocks = function (opts) {

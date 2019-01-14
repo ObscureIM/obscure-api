@@ -36,14 +36,14 @@ const daemon = new TurtleCoind({
 // })
 
 //lets get the transaction in the latest block
-daemon.getLastBlockHeader().then(function(fufilled){
-  daemon.getBlock({
-    hash:fufilled.hash
-  }).then((block) => {
-    console.log(block.transactions)
-  }).catch(function(error) {
-    console.log(error.message)
-  })
-}).catch(function(error) {
-  console.log(error.message)
-})
+// daemon.getLastBlockHeader().then(function(fufilled){
+//   daemon.getBlock({
+//     hash:fufilled.hash
+//   }).then((block) => {
+//     console.log(block.transactions)
+//   }).catch(function(error) {
+//     console.log(error.message)
+//   })
+// }).catch(function(error) {
+//   console.log(error.message)
+// })
