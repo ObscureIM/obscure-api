@@ -86,3 +86,46 @@ app.get("/api/getblocks", function(req, res) {
     res.send(error.message)
   })
 });
+
+//get the block when a call with height is used
+app.get("/api/block",function(req,res) {
+  //make sure to call /api/block?height=12345
+  //get the block header by height
+  daemon.getBlockHeaderByHeight({
+    height:parseInt(req.query.height)
+  }).then(function(fufilled) {
+    daemon.getBlock({
+      hash:fufilled.hash
+    }).then((block) => {
+      res.send(block)
+    }).catch(function(error) {
+      res.send(error.message)
+    })
+  })
+})
+
+//get a block using block hash
+app.get("/api/blockByHash",function(req,res) {
+  //make sure to call /api/blockByHash?hash=12345
+  //test hash c7a0878fb61f544217e4eb10e51f5e513845afbb18310f3649646712474779a5
+  daemon.getBlock({
+    hash:req.query.hash
+  }).then((block) => {
+    res.send(block)
+  }).catch(function(error) {
+    res.send(error.message)
+  })
+})
+
+app.get("/api/blockByTxHash",function(req,res) {
+  //make sure to call /api/blockByTxHash?TxHash=7890
+  //test txhash = 669dd6efcb356defa5c61c91f4494639f890aaab8d5019f26c5934054e7d2a14
+  daemon.getTransaction({
+    //hash:req.query.TxHash
+    hash:'669dd6efcb356defa5c61c91f4494639f890aaab8d5019f26c5934054e7d2a14'
+  }).then((block) => {
+    res.send(block)
+  }).catch(function(error) {
+    res.send(error.message)
+  })
+})

@@ -35,7 +35,7 @@ const daemon = new TurtleCoind({
 //   console.log(error.message)
 // })
 
-//lets get the transaction in the latest block
+// lets get the transaction in the latest block
 // daemon.getLastBlockHeader().then(function(fufilled){
 //   daemon.getBlock({
 //     hash:fufilled.hash
@@ -47,3 +47,26 @@ const daemon = new TurtleCoind({
 // }).catch(function(error) {
 //   console.log(error.message)
 // })
+
+//if height is input, we run getblockheaderbyheight and then getblock using hash
+// daemon.getBlockHeaderByHeight({
+//   height:200
+// }).then(function(fufilled) {
+//   daemon.getBlock({
+//     hash:fufilled.hash
+//   }).then((block) => {
+//     console.log(block)
+//   }).catch(function(error) {
+//     console.log(error.message)
+//   })
+// })
+
+//get block by hashes
+daemon.getBlock({
+  //hash:parseInt(req.query.hash)
+  hash:'c7a0878fb61f544217e4eb10e51f5e513845afbb18310f3649646712474779a5'
+}).then((block) => {
+  console.log(block)
+}).catch(function(error) {
+  console.log(error.message)
+})
