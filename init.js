@@ -121,8 +121,7 @@ app.get("/api/blockByTxHash",function(req,res) {
   //make sure to call /api/blockByTxHash?TxHash=7890
   //test txhash = 669dd6efcb356defa5c61c91f4494639f890aaab8d5019f26c5934054e7d2a14
   daemon.getTransaction({
-    //hash:req.query.TxHash
-    hash:'669dd6efcb356defa5c61c91f4494639f890aaab8d5019f26c5934054e7d2a14'
+    hash:req.query.TxHash
   }).then((block) => {
     res.send(block)
   }).catch(function(error) {
