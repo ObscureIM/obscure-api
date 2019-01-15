@@ -25,7 +25,7 @@ var server = app.listen(process.env.PORT || 8080, function () {
 const TurtleCoind = require('turtlecoin-rpc').TurtleCoind
 
 const daemon = new TurtleCoind({
-  host: '209.97.174.174', // ip address or hostname of the TurtleCoind host
+  host: '142.93.67.56', // ip address or hostname of the TurtleCoind host
   port: 11898, // what port is the RPC server running on
   timeout: 2000, // request timeout
   ssl: false, // whether we need to connect using SSL/TLS
@@ -120,6 +120,7 @@ app.get("/api/blockByHash",function(req,res) {
 app.get("/api/blockByTxHash",function(req,res) {
   //make sure to call /api/blockByTxHash?TxHash=7890
   //test txhash = 669dd6efcb356defa5c61c91f4494639f890aaab8d5019f26c5934054e7d2a14
+  //by tx hash will populate the input and output
   daemon.getTransaction({
     hash:req.query.TxHash
   }).then((block) => {
